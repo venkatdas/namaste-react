@@ -24,3 +24,18 @@
 ## for production ready APP
 - npx parcel build index.html
 
+
+ ###  Two types of Export/Import
+
+ -  Default Export / Import
+
+export default component
+import Component from './component'
+
+- Named Export /Import
+export const component
+import {component} from "path"
+
+
+- To get emojies in vs code the short cut  windowsLogo +;
+
