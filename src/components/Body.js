@@ -23,16 +23,23 @@ const Body = () => {
       "https://www.swiggy.com/dapi/restaurants/list/v5?lat=17.406498&lng=78.47724389999999&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
     );
     const response = await data.json();
-    setRestaurants(
-      response?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
-        ?.restaurants
-    );
+    console.log("fullrespone", response);
+    const restaranudataaaaaaa =
+      response?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle
+        ?.restaurants;
+    console.log("restaranudataaaaaaa", restaranudataaaaaaa);
+    setRestaurants(restaranudataaaaaaa);
+    // setRestaurants(
+    //   response?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
+    //     ?.restaurants
+    // );
+    console.log("setRestaurants", setRestaurants);
     setFilterRestroData(
-      response?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
+      response?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle
         ?.restaurants
     );
 
-    console.log(response);
+    console.log(response); //
   };
 
   const isOnline = useStatusOnline();
@@ -42,10 +49,11 @@ const Body = () => {
     <Shimmer />
   ) : (
     <div className="body">
-      <div className="filter">
-        <div className="search-input">
+      <div className="filter flex">
+        <div className="search-input m-4 p-4">
           <input
             type="text"
+            className="border border-solid border-black rounded-md "
             placeholder="Search For Restaraunts"
             value={searchText}
             onChange={(e) => {
@@ -53,7 +61,7 @@ const Body = () => {
             }}
           />
           <button
-            className="btn-search"
+            className="px-4 py-1 bg-green-300 m-4  rounded-md "
             onClick={() => {
               const filteredRestaurants = restaurants.filter((res) =>
                 res.info.name.toLowerCase().includes(searchText.toLowerCase())
@@ -65,11 +73,16 @@ const Body = () => {
             search
           </button>
         </div>
-        <button className="filter-btn" onClick={handleFilterData}>
-          Top Rated restaurants
-        </button>
+        <div className="search-input m-4 p-4 flex  items-center ">
+          <button
+            className="px-4 py-2 bg-gray-200 rounded-lg flex justify-between "
+            onClick={handleFilterData}
+          >
+            Top Rated restaurants
+          </button>
+        </div>
       </div>
-      <div className="res-container">
+      <div className="flex flex-wrap rounded">
         {filterRestroData.map((res) => {
           return (
             <Link key={res.info.id} to={"/restaurants/" + res.info.id}>
